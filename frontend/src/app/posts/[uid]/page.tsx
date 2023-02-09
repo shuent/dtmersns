@@ -14,7 +14,11 @@ export default async function PostDetail({
         <div>
           {post.body} - {post.original_filename} by {post.user_uid}
         </div>
-        <audio controls src={getAudioUrl(post.audio_filename)}></audio>
+        <audio
+          preload="none"
+          controls
+          src={getAudioUrl(post.audio_filename)}
+        ></audio>
       </div>
     )
   } catch (error) {

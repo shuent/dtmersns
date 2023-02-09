@@ -1,4 +1,4 @@
-import { Post, PostCreate, UserCreate } from '@/model'
+import { Post, PostCreate, UserCreate, UserUpdate } from '@/model'
 
 const apiBaseUrl = 'http://localhost:8000'
 export const fetcher = async (path: string) => {
@@ -33,10 +33,36 @@ export const createPostFetcher = async (post: PostCreate, token: string) => {
   return res.json()
 }
 
-export const createUserFetcher = async (token:string, userParams: UserCreate) => {
+export const createUserFetcher = async (
+  token: string,
+  userParams: UserCreate,
+) => {
   const path = '/users'
   const res = await fetch(apiBaseUrl + path, {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userParams),
+  })
+
+  if (!res.ok) {
+    const error = new Error('データ取得中にエラーが起きました。')
+
+    throw error
+  }
+
+  return res.json()
+}
+
+export const updateUserFetcher = async (
+  token: string,
+  userParams: UserUpdate,
+) => {
+  const path = '/users'
+  const res = await fetch(apiBaseUrl + path, {
+    method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',

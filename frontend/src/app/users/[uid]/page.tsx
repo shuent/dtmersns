@@ -24,7 +24,10 @@ export default function UserDetailPage({
     <ul>
       <li>nickname: {data.nickname}</li>
       <li>uid: {data.uid}</li>
+      <img src={data.img_url} alt="" />
       <li>twitter: {data.twitter_id}</li>
+      <li>soundcloud: {data.soundcloud_id}</li>
+      <li>prof: {data.body}</li>
     </ul>
   )
 }

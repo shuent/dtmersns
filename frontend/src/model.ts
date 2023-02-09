@@ -19,6 +19,10 @@ export type User = {
 
 export type UserCreate = {
   nickname: string
+}
+
+export type UserUpdate = {
+  nickname?: string
   body?: string
   img_url?: string
   twitter_id?: string

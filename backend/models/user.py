@@ -16,7 +16,11 @@ class User(UserBase, table=True):
 
 class UserCreate(UserBase):
     uid: str | None
-    pass
+
+
+class UserUpdate(UserBase):
+    uid: str | None
+    nickname: str | None
 
 
 class UserRead(UserBase):
