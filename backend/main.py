@@ -6,19 +6,21 @@ import firebase_admin
 from firebase_admin import credentials
 
 from routers import posts, users
-from models.database import create_db_and_tables
+from db.database import create_db_and_tables
 from core.settings import Settings
-
+from firebase_cred import cred
 # app
 settings = Settings()
 app = FastAPI()
 
 
-cert = credentials.Certificate('dtmersns-fire-admin-key.json')
+cert = credentials.Certificate(cred)
 firebase_admin.initialize_app(cert)
 
 
 origins = [
+    settings.WEB_CLIENT_URL,
+    "http://localhost",
     "http://localhost:3000",
 ]
 

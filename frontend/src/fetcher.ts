@@ -14,7 +14,7 @@ export const fetcher = async (path: string) => {
 }
 
 export const createPostFetcher = async (post: PostCreate, token: string) => {
-  const path = '/posts'
+  const path = '/posts/'
   const res = await fetch(apiBaseUrl + path, {
     method: 'POST',
     headers: {
@@ -37,7 +37,7 @@ export const createUserFetcher = async (
   token: string,
   userParams: UserCreate,
 ) => {
-  const path = '/users'
+  const path = '/users/'
   const res = await fetch(apiBaseUrl + path, {
     method: 'POST',
     headers: {
@@ -60,7 +60,7 @@ export const updateUserFetcher = async (
   token: string,
   userParams: UserUpdate,
 ) => {
-  const path = '/users'
+  const path = '/users/'
   const res = await fetch(apiBaseUrl + path, {
     method: 'PATCH',
     headers: {

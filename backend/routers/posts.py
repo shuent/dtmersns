@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from typing import List
 from sqlmodel import Session
 
-from models.database import get_session
+from db.database import get_session
 from models.post import Post, PostCreate, PostRead
 from repositories.post_repository import PostRepository
 from lib.audio_upload import AudioUpload

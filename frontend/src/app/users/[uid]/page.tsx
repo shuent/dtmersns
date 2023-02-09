@@ -1,5 +1,3 @@
-import { useAuthContext } from '@/provider/auth_provider'
-import useSWR from 'swr'
 import { fetcher } from '@/fetcher'
 import { User } from '@/model'
 
@@ -8,7 +6,12 @@ export default async function UserDetailPage({
 }: {
   params: { uid: string }
 }) {
-  const data: User = await fetcher('/users/' + params.uid)
+  let data: User
+  try {
+    data = await fetcher('/users/' + params.uid)
+  } catch (e) {
+    return <>{e.message}</>
+  }
   return (
     <div>
       <ul>

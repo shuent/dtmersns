@@ -24,6 +24,6 @@ export default async function PostDetail({
       </div>
     )
   } catch (error) {
-    return <div>{error.message}</div>
+    return <div>{JSON.stringify(error)}</div>
   }
 }

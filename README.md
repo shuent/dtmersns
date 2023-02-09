@@ -37,8 +37,9 @@ fly.io
 ```
 cd backend
 # deploy
+flyctl deploy
 
-# secret env set
+# secret env set ?
 cat .env | tr '\n' ' ' | xargs flyctl secrets set
 
 ```

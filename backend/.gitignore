@@ -1,3 +1,4 @@
 dev.sqlite
 dtmersns-fire-admin-key.json
 .env
+.env.local

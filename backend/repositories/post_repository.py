@@ -1,6 +1,5 @@
 from sqlmodel import Session, select
 from models.user import User
-from models.database import engine
 from models.post import Post, PostCreate
 
 

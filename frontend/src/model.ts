@@ -6,7 +6,7 @@ export type Post = {
   audio_filename: string
   original_filename: string
   user_uid: string
-  user: User
+  user?: User
 }
 
 export type User = {

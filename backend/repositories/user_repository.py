@@ -1,6 +1,5 @@
 from sqlmodel import Session, select
 from models.post import Post
-from models.database import engine
 from models.user import User, UserCreate, UserUpdate
 
 
