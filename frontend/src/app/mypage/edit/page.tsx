@@ -23,7 +23,7 @@ const updateUserProfile = async (params: UserUpdate, user: FireUser) => {
 export default function EditUserPage() {
   const { user } = useAuthContext()
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault()
 
     if (!user) {
