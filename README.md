@@ -7,7 +7,7 @@
 ## Links
 
 - FE: https://dtmersns.web.app/
-- BE: https://dtmersnsapi.fly.dev/
+- BE: https://dtmersnsapi.fly.dev/docs
 
 ## To Start Develop
 
