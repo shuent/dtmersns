@@ -1,11 +1,11 @@
-from fastapi import APIRouter, Depends, Request, UploadFile, Form, File
+from fastapi import APIRouter, Depends, HTTPException, Request, UploadFile, Form, File
 from fastapi.responses import HTMLResponse
 from typing import List
 
 from models.post import Post, PostCreate, PostRead
 from repositories.post_repository import PostRepository
 from lib.audio_upload import AudioUpload
-from lib.verify_user import verify_user
+from lib.verify_fire_user import verify_user
 
 router = APIRouter(
     prefix='/posts'
@@ -19,7 +19,10 @@ async def get_list():
 
 @router.get('/{post_id}', response_model=PostRead)
 async def get_post(post_id: str):
-    return PostRepository.get(post_id)
+    if post := PostRepository.get(post_id):
+        return post
+    else:
+        raise HTTPException(status_code=404, detail='Post not found')
 
 
 @router.post('/')

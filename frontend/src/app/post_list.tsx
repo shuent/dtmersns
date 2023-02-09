@@ -13,6 +13,7 @@ export function PostList() {
   if (isLoading) {
     return <div>loading...</div>
   }
+  if (error) return <div>{error.message}</div>
 
   return (
     <ul>
@@ -23,7 +24,11 @@ export function PostList() {
             -----
             <Link href={`/users/${post.user_uid}`}>{post.user_uid}</Link>
           </div>
-          <audio controls src={getAudioUrl(post.audio_filename)}></audio>
+          <audio
+            preload="none"
+            controls
+            src={getAudioUrl(post.audio_filename)}
+          ></audio>
         </li>
       ))}
     </ul>

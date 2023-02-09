@@ -2,6 +2,8 @@
 
 import { useAuthContext } from '@/provider/auth_provider'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserFetcher } from '@/fetcher'
+import { UserCreate } from '@/model'
 
 export default function SignInPage() {
   const { user } = useAuthContext()
@@ -12,7 +14,17 @@ export default function SignInPage() {
     const password = e.target.password.value
 
     try {
-      await createUserWithEmailAndPassword(getAuth(), email, password)
+      const cred = await createUserWithEmailAndPassword(
+        getAuth(),
+        email,
+        password,
+      )
+      // construct user info for db
+      const token = await cred.user.getIdToken(false)
+      const initialName = cred.user.email.split('@')[0]
+      const userParams: UserCreate = { nickname: initialName }
+
+      createUserFetcher(token, userParams)
     } catch (e) {
       console.log(e)
     }
