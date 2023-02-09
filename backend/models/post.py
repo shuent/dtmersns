@@ -1,4 +1,4 @@
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
 
 
 class PostBase(SQLModel):
@@ -11,6 +11,8 @@ class PostBase(SQLModel):
 
 class Post(PostBase, table=True):
     uid: str = Field(primary_key=True)
+    user_uid: str = Field(foreign_key='user.uid')
+    user: "User" = Relationship(back_populates='posts')
 
 
 class PostCreate(PostBase):
@@ -18,4 +20,13 @@ class PostCreate(PostBase):
 
 
 class PostRead(PostBase):
-    pass
+    user: "User" = None
+
+# fmt: off
+from models.user import User, UserRead
+
+Post.update_forward_refs()
+PostRead.update_forward_refs()
+
+# other relation model
+# this way prevents circlar import for relation

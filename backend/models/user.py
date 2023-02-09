@@ -1,4 +1,6 @@
-from sqlmodel import Field, SQLModel
+# from __future__ import annotations
+from typing import List, ForwardRef, TYPE_CHECKING
+from sqlmodel import Field, Relationship, SQLModel
 
 
 class UserBase(SQLModel):
@@ -12,6 +14,7 @@ class UserBase(SQLModel):
 
 class User(UserBase, table=True):
     uid: str = Field(primary_key=True)
+    posts: List["Post"] = Relationship(back_populates='user')
 
 
 class UserCreate(UserBase):
@@ -25,3 +28,13 @@ class UserUpdate(UserBase):
 
 class UserRead(UserBase):
     pass
+
+
+class UserReadWithPosts(UserRead):
+    posts: List["Post"] = []
+
+#fmt: off
+from models.post import Post
+
+User.update_forward_refs()
+UserReadWithPosts.update_forward_refs()
