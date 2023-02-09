@@ -6,6 +6,7 @@ export type Post = {
   audio_filename: string
   original_filename: string
   user_uid: string
+  user: User
 }
 
 export type User = {
@@ -15,6 +16,7 @@ export type User = {
   img_url: string
   twitter_id: string
   soundcloud_id: string
+  posts?: Post[]
 }
 
 export type UserCreate = {

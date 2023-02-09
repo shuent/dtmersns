@@ -20,7 +20,7 @@ class PostCreate(PostBase):
 
 
 class PostRead(PostBase):
-    user: "User" = None
+    user: "User"
 
 # fmt: off
 from models.user import User, UserRead
@@ -28,5 +28,3 @@ from models.user import User, UserRead
 Post.update_forward_refs()
 PostRead.update_forward_refs()
 
-# other relation model
-# this way prevents circlar import for relation

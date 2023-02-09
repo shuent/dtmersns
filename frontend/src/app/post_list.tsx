@@ -8,7 +8,7 @@ import { getAudioUrl } from '@/storage'
 import { Post } from '@/model'
 
 export function PostList() {
-  const { data, error, isLoading } = useSWR('/posts/', fetcher)
+  const { data, error, isLoading } = useSWR<Post[]>('/posts/', fetcher)
 
   if (isLoading) {
     return <div>loading...</div>
@@ -17,12 +17,12 @@ export function PostList() {
 
   return (
     <ul>
-      {data.map((post: Post) => (
+      {data.map((post) => (
         <li key={post.uid}>
           <div>
             <Link href={`/posts/${post.uid}`}>{post.uid}</Link>: {post.body}
-            -----
-            <Link href={`/users/${post.user_uid}`}>{post.user_uid}</Link>
+            {' by '}
+            <Link href={`/users/${post.user_uid}`}>{post.user.nickname}</Link>
           </div>
           <audio
             preload="none"

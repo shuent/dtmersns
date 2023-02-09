@@ -12,7 +12,7 @@ export const getAudioUrl = (filename) => {
   return `https://firebasestorage.googleapis.com/v0/b/dtmersns.appspot.com/o/${bucketName}%2F${filename}?alt=media`
 }
 
-export const upload = async (file, filename, user_uid) => {
+export const uploadAudio = async (file, filename, user_uid) => {
   const audioRef = ref(storage, 'post_audio/' + filename)
   const metadata = {
     contentType: 'audio/mp3',
@@ -22,5 +22,17 @@ export const upload = async (file, filename, user_uid) => {
   }
   const snapshot = await uploadBytes(audioRef, file, metadata)
   // const url = await getDownloadURL(snapshot.ref)
+  return snapshot
+}
+
+export const uploadProfImg = async (file, filename, user_uid) => {
+  const imgRef = ref(storage, 'prof_img/' + user_uid + '/' + filename)
+  const metadata = {
+    contentType: 'image/*',
+    customMetadata: {
+      userUid: user_uid,
+    },
+  }
+  const snapshot = await uploadBytes(imgRef, file, metadata)
   return snapshot
 }

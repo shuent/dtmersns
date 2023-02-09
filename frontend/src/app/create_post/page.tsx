@@ -3,7 +3,7 @@
 import { createPostFetcher } from '@/fetcher'
 import { Post, PostCreate } from '@/model'
 import { useAuthContext } from '@/provider/auth_provider'
-import { upload } from '@/storage'
+import { uploadAudio } from '@/storage'
 import { uuidv4 } from '@firebase/util'
 import { getAuth, User } from 'firebase/auth'
 
@@ -13,7 +13,7 @@ const createPostWithFile = async (user: User, body: string, file: File) => {
 
   const filename = uuid + '__' + file.name
   // TODO: uncomment this to upload storage
-  const snapshot = await upload(file, filename, user.uid)
+  const snapshot = await uploadAudio(file, filename, user.uid)
 
   // struct post
   const post: PostCreate = {

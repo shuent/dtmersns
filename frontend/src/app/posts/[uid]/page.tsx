@@ -1,6 +1,7 @@
 import { fetcher } from '@/fetcher'
 import { Post } from '@/model'
 import { getAudioUrl } from '@/storage'
+import Link from 'next/link'
 
 export default async function PostDetail({
   params,
@@ -12,7 +13,8 @@ export default async function PostDetail({
     return (
       <div>
         <div>
-          {post.body} - {post.original_filename} by {post.user_uid}
+          {post.body} - {post.original_filename} by{' '}
+          <Link href={`/users/${post.user_uid}`}>{post.user.nickname}</Link>
         </div>
         <audio
           preload="none"

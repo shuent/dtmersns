@@ -5,12 +5,13 @@ import { getAuth, User as FireUser } from 'firebase/auth'
 import { User, UserUpdate } from '@/model'
 import { filterObject } from '@/util'
 import { updateUserFetcher } from '@/fetcher'
+import { uploadProfImg } from '@/storage'
 
 const updateUserProfile = async (params: UserUpdate, user: FireUser) => {
   // generate uuid
 
   // TODO: upload img
-  // const snapshot = await upload(file, filename, user.uid)
+  // const snapshot = await uploadProfImg(file, filename, user.uid)
 
   // get user token
   const token = await user.getIdToken()

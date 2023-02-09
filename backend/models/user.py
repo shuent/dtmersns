@@ -33,6 +33,7 @@ class UserRead(UserBase):
 class UserReadWithPosts(UserRead):
     posts: List["Post"] = []
 
+
 #fmt: off
 from models.post import Post
 

@@ -4,6 +4,7 @@ import useSWR from 'swr'
 
 import { fetcher } from '@/fetcher'
 import { User } from '@/model'
+import Link from 'next/link'
 
 export default function MyPage() {
   const { user } = useAuthContext()
@@ -12,17 +13,11 @@ export default function MyPage() {
     fetcher,
   )
 
-  if (isLoading) return <div>loading...</div>
-  if (error) return <div>{error.message}</div>
-
   return (
-    <ul>
-      <li>nickname: {data.nickname}</li>
-      <li>uid: {data.uid}</li>
-      <img src={data.img_url} width={30} alt={data.img_url} />
-      <li>twitter: {data.twitter_id}</li>
-      <li>soundcloud: {data.soundcloud_id}</li>
-      <li>prof: {data.body}</li>
-    </ul>
+    <div>
+      <Link href={`/users/${user.uid}`}>My Profile page</Link>
+      <br />
+      <Link href={'/mypage/edit'}>Edit profile</Link>
+    </div>
   )
 }
