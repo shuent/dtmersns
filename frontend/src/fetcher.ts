@@ -1,6 +1,6 @@
 import { Post, PostCreate, UserCreate, UserUpdate } from '@/model'
 
-const apiBaseUrl = 'http://localhost:8000'
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
 export const fetcher = async (path: string) => {
   const res = await fetch(apiBaseUrl + path)
 
