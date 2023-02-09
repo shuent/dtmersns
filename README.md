@@ -4,6 +4,11 @@
 - Frontend: Next.js on Firebase Hosting
 - Infrastructure: Firebase Storage
 
+## Links
+
+- FE: https://dtmersns.web.app/
+- BE: https://dtmersnsapi.fly.dev/
+
 ## To Start Develop
 
 - create file: firebaseConfig on front, firebaseAdminKey.json on backend
