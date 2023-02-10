@@ -1,6 +1,8 @@
 import { fetcher } from '@/fetcher'
 import { User } from '@/model'
 
+export const revalidate = 60
+
 export default async function UserDetailPage({
   params,
 }: {

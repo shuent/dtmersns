@@ -3,6 +3,8 @@ import { Post } from '@/model'
 import { getAudioUrl } from '@/storage'
 import Link from 'next/link'
 
+export const revalidate = 60
+
 export default async function PostDetail({
   params,
 }: {
