@@ -8,10 +8,14 @@ class PostRepository:
 
     def get_all(session: Session):
         # solve n + 1
-        return session.exec(select(Post).options(joinedload(Post.user))).all()
+        return session.exec(select(Post)
+                            .options(joinedload(Post.user))
+                            .options(joinedload(Post.comments, innerjoin=True))
+                            .options(joinedload(Post.likes, innerjoin=True))
+                            ).all()
 
     def get(session: Session, uid: str):
-        return session.get(Post, uid)
+        return session.get(Post, uid, options=[joinedload(Post.comments), joinedload(Post.likes)])
 
     def create(session: Session, post: PostCreate):
         d_post = Post.from_orm(post)

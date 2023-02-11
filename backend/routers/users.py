@@ -6,7 +6,7 @@ from database import get_session
 from repositories.user_repository import UserRepository
 from lib.verify_fire_user import verify_user
 
-from models.user import User, UserRead, UserCreate, UserUpdate, UserReadWithPosts
+from models.user import User, UserRead, UserCreate, UserUpdate, UserReadDetail
 router = APIRouter(
     prefix='/users'
 )
@@ -17,7 +17,7 @@ async def get_list(session: Session = Depends(get_session)):
     return UserRepository.get_all(session)
 
 
-@router.get('/{uid}', response_model=UserReadWithPosts)
+@router.get('/{uid}', response_model=UserReadDetail)
 async def get(*, session: Session = Depends(get_session), uid: str):
     if user := UserRepository.get(session, uid):
         return user

@@ -1,3 +1,4 @@
+from typing import List
 from sqlmodel import Field, Relationship, SQLModel
 
 
@@ -12,7 +13,9 @@ class PostBase(SQLModel):
 class Post(PostBase, table=True):
     uid: str = Field(primary_key=True)
     user_uid: str = Field(foreign_key='user.uid')
-    user: "User" = Relationship(back_populates='posts')
+    user: 'User' = Relationship(back_populates='posts')
+    comments: List['Comment'] = Relationship(back_populates='post')
+    likes: List['Like'] = Relationship(back_populates='post')
 
 
 class PostCreate(PostBase):
@@ -20,10 +23,14 @@ class PostCreate(PostBase):
 
 
 class PostRead(PostBase):
-    user: "User"
+    user: 'User'
+    likes: List['Like'] = []
+    comments: List['Comment'] = []
 
 # fmt: off
-from models.user import User, UserRead
+from models.user import User
+from models.comment import Comment
+from models.like import Like
 
 Post.update_forward_refs()
 PostRead.update_forward_refs()

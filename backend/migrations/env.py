@@ -6,6 +6,8 @@ from sqlalchemy import pool
 
 from models.post import Post
 from models.user import User
+from models.like import Like
+from models.comment import Comment
 from sqlmodel import SQLModel
 
 from alembic import context

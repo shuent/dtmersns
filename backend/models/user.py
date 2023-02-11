@@ -14,7 +14,9 @@ class UserBase(SQLModel):
 
 class User(UserBase, table=True):
     uid: str = Field(primary_key=True)
-    posts: List["Post"] = Relationship(back_populates='user')
+    posts: List['Post'] = Relationship(back_populates='user')
+    comments: List['Comment'] = Relationship(back_populates='user')
+    likes: List['Like'] = Relationship(back_populates='user')
 
 
 class UserCreate(UserBase):
@@ -30,12 +32,15 @@ class UserRead(UserBase):
     pass
 
 
-class UserReadWithPosts(UserRead):
+class UserReadDetail(UserRead):
     posts: List["Post"] = []
-
+    likes: List['Like'] = []
+    comments: List['Comment'] = []
 
 #fmt: off
 from models.post import Post
+from models.comment import Comment
+from models.like import Like
 
 User.update_forward_refs()
-UserReadWithPosts.update_forward_refs()
+UserReadDetail.update_forward_refs()
