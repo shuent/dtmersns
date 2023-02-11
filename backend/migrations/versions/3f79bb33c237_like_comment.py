@@ -1,8 +1,8 @@
-"""comment like
+"""like comment
 
-Revision ID: 9fe8434f2323
+Revision ID: 3f79bb33c237
 Revises: 9ea20b0987c4
-Create Date: 2023-02-11 17:38:09.753819
+Create Date: 2023-02-11 19:20:46.006910
 
 """
 from alembic import op
@@ -11,7 +11,7 @@ import sqlmodel
 
 
 # revision identifiers, used by Alembic.
-revision = '9fe8434f2323'
+revision = '3f79bb33c237'
 down_revision = '9ea20b0987c4'
 branch_labels = None
 depends_on = None
@@ -22,6 +22,7 @@ def upgrade() -> None:
     op.create_table('comment',
     sa.Column('post_uid', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('user_uid', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
+    sa.Column('body', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['post_uid'], ['post.uid'], ),
     sa.ForeignKeyConstraint(['user_uid'], ['user.uid'], ),

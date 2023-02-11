@@ -23,6 +23,7 @@ export default async function PostDetail({
           controls
           src={getAudioUrl(post.audio_filename)}
         ></audio>
+        comment: {post.comments.length}, like: {post.likes.length}
       </div>
     )
   } catch (error) {

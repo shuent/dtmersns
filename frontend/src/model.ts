@@ -7,6 +7,8 @@ export type Post = {
   original_filename: string
   user_uid: string
   user?: User
+  comments: []
+  likes: []
 }
 
 export type User = {

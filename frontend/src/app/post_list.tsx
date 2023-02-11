@@ -29,6 +29,7 @@ export function PostList() {
             controls
             src={getAudioUrl(post.audio_filename)}
           ></audio>
+          comment: {post.comments.length}, like: {post.likes.length}
         </li>
       ))}
     </ul>

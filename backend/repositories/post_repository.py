@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 from models.user import User
 from models.post import Post, PostCreate
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, subqueryload
 
 
 class PostRepository:
@@ -10,8 +10,8 @@ class PostRepository:
         # solve n + 1
         return session.exec(select(Post)
                             .options(joinedload(Post.user))
-                            .options(joinedload(Post.comments, innerjoin=True))
-                            .options(joinedload(Post.likes, innerjoin=True))
+                            .options(subqueryload(Post.comments))
+                            .options(subqueryload(Post.likes))
                             ).all()
 
     def get(session: Session, uid: str):
