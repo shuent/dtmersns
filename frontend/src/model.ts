@@ -7,8 +7,8 @@ export type Post = {
   original_filename: string
   user_uid: string
   user?: User
-  comments: []
-  likes: []
+  comments?: []
+  likes?: []
 }
 
 export type User = {
@@ -31,4 +31,19 @@ export type UserUpdate = {
   img_url?: string
   twitter_id?: string
   soundcloud_id?: string
+}
+
+export type LikeCreate = {
+  post_uid: string
+}
+
+export type CommentCreate = {
+  post_uid: string
+  body: string
+}
+
+export type Comment = {
+  body: string
+  post_uid: string
+  user: User
 }

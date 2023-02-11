@@ -1,7 +1,6 @@
 import { PostList } from './post_list'
 
 export default async function Page() {
-  // const res = await signIn()
 
   return (
     <>

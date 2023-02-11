@@ -25,11 +25,11 @@ class PostCreate(PostBase):
 class PostRead(PostBase):
     user: 'User'
     likes: List['Like'] = []
-    comments: List['Comment'] = []
+    comments: List['CommentRead'] = []
 
 # fmt: off
 from models.user import User
-from models.comment import Comment
+from models.comment import Comment, CommentRead
 from models.like import Like
 
 Post.update_forward_refs()

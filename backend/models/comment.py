@@ -13,6 +13,11 @@ class Comment(CommentBase, table=True):
     user: 'User' = Relationship(back_populates='comments')
 
 
+class CommentRead(CommentBase):
+    id: int
+    user: 'User'
+
+
 class CommentCreate(CommentBase):
     pass
 
@@ -22,3 +27,4 @@ from models.post import Post
 from models.user import User
 
 Comment.update_forward_refs()
+CommentRead.update_forward_refs()

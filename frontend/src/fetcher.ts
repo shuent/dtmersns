@@ -1,4 +1,11 @@
-import { Post, PostCreate, UserCreate, UserUpdate } from '@/model'
+import {
+  CommentCreate,
+  LikeCreate,
+  Post,
+  PostCreate,
+  UserCreate,
+  UserUpdate,
+} from '@/model'
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASEURL
 export const fetcher = async (path: string) => {
@@ -13,38 +20,19 @@ export const fetcher = async (path: string) => {
   return res.json()
 }
 
-export const createPostFetcher = async (post: PostCreate, token: string) => {
-  const path = '/posts/'
-  const res = await fetch(apiBaseUrl + path, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(post),
-  })
-
-  if (!res.ok) {
-    const error = new Error('データ取得中にエラーが起きました。')
-
-    throw error
-  }
-
-  return res.json()
-}
-
-export const createUserFetcher = async (
+export const mutateFetcher = async (
+  path: string,
+  method: string,
   token: string,
-  userParams: UserCreate,
+  params: any,
 ) => {
-  const path = '/users/'
   const res = await fetch(apiBaseUrl + path, {
-    method: 'POST',
+    method: method,
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(userParams),
+    body: JSON.stringify(params),
   })
 
   if (!res.ok) {
@@ -56,25 +44,17 @@ export const createUserFetcher = async (
   return res.json()
 }
 
-export const updateUserFetcher = async (
-  token: string,
-  userParams: UserUpdate,
-) => {
-  const path = '/users/'
-  const res = await fetch(apiBaseUrl + path, {
-    method: 'PATCH',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userParams),
-  })
+export const createPostFetcher = async (params: PostCreate, token: string) =>
+  mutateFetcher('/posts/', 'POST', token, params)
 
-  if (!res.ok) {
-    const error = new Error('データ取得中にエラーが起きました。')
+export const createUserFetcher = async (token: string, params: UserCreate) =>
+  mutateFetcher('/users/', 'POST', token, params)
 
-    throw error
-  }
+export const updateUserFetcher = async (token: string, params: UserUpdate) =>
+  mutateFetcher('/users/', 'PATCH', token, params)
 
-  return res.json()
-}
+export const createLikeFetcher = (token: string, params: LikeCreate) =>
+  mutateFetcher('/likes/', 'POST', token, params)
+
+export const createCommentFetcher = (token: string, params: CommentCreate) =>
+  mutateFetcher('/comments/', 'POST', token, params)

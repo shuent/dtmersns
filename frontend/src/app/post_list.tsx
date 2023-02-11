@@ -6,6 +6,7 @@ import { fetcher } from '@/fetcher'
 import Link from 'next/link'
 import { getAudioUrl } from '@/storage'
 import { Post } from '@/model'
+import { Like } from '@/components/like'
 
 export function PostList() {
   const { data, error, isLoading } = useSWR<Post[]>('/posts/', fetcher)
@@ -29,7 +30,8 @@ export function PostList() {
             controls
             src={getAudioUrl(post.audio_filename)}
           ></audio>
-          comment: {post.comments.length}, like: {post.likes.length}
+          comment: {post.comments.length},{' '}
+          <Like likesNum={post.likes.length} postUid={post.uid} />
         </li>
       ))}
     </ul>
