@@ -15,7 +15,6 @@ export function NavBar() {
       {user ? (
         <>
           <button onClick={handleLogout}>Log out</button>{' '}
-          <Link href="/create_post">Create Post</Link>{' '}
           <Link href="/mypage">My Page</Link>{' '}
         </>
       ) : (

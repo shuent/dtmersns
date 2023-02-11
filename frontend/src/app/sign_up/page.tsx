@@ -1,11 +1,15 @@
 'use client'
 
 import { useAuthContext } from '@/provider/auth_provider'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  deleteUser,
+} from 'firebase/auth'
 import { createUserFetcher } from '@/fetcher'
 import { UserCreate } from '@/model'
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const { user } = useAuthContext()
 
   const handleSubmit = async (e: any) => {
@@ -24,7 +28,12 @@ export default function SignInPage() {
       const initialName = cred.user.email.split('@')[0]
       const userParams: UserCreate = { nickname: initialName }
 
-      createUserFetcher(token, userParams)
+      // DBに保存失敗したら、firebase userも削除する.
+      try {
+        await createUserFetcher(token, userParams)
+      } catch (e) {
+        deleteUser(cred.user)
+      }
     } catch (e) {
       console.log(e)
     }

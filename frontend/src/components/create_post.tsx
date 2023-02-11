@@ -32,7 +32,7 @@ const createPostWithFile = async (user: User, body: string, file: File) => {
   console.log(res)
 }
 
-export default function CreatePostPage() {
+export function CreatePost() {
   const { user } = useAuthContext()
 
   const handleSubmit = (e: any) => {
@@ -41,16 +41,22 @@ export default function CreatePostPage() {
     const body = e.target.body.value
 
     if (!(user && file && body)) {
-      console.log('cannot perform')
+      alert('cannot perform')
       return
     }
     createPostWithFile(user, body, file)
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea name="body" placeholder="write sth" />
-      mp3 upload: <input type="file" name="song" accept="audio/mp3" />
-      <input type="submit" value="submit" />
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          name="body"
+          placeholder="write sth"
+          style={{ width: '90vw' }}
+        />
+        mp3 upload: <input type="file" name="song" accept="audio/mp3" />
+        <input type="submit" value="投稿" />
+      </form>
+    </div>
   )
 }
