@@ -1,6 +1,7 @@
 from sqlmodel import Session, select
 from models.post import Post
 from models.user import User, UserCreate, UserUpdate
+from sqlalchemy.orm import joinedload
 
 
 class UserRepository:
@@ -9,7 +10,8 @@ class UserRepository:
         return session.exec(select(User)).all()
 
     def get(session: Session, uid: str):
-        u = session.get(User, uid)
+        # solve n+1
+        u = session.get(User, uid, options={joinedload(User.posts)})
         # print(u.posts)
         # return session.get(User, uid)
         return u

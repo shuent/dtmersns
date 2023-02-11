@@ -1,12 +1,14 @@
 from sqlmodel import Session, select
 from models.user import User
 from models.post import Post, PostCreate
+from sqlalchemy.orm import joinedload
 
 
 class PostRepository:
 
     def get_all(session: Session):
-        return session.exec(select(Post).join(User)).all()
+        # solve n + 1
+        return session.exec(select(Post).options(joinedload(Post.user))).all()
 
     def get(session: Session, uid: str):
         return session.get(Post, uid)
