@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlmodel import Session
 from typing import List
 
-from db.database import get_session
+from database import get_session
 from repositories.user_repository import UserRepository
 from lib.verify_fire_user import verify_user
 

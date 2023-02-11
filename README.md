@@ -44,12 +44,23 @@ cd backend
 # deploy
 flyctl deploy
 
-# secret env set ?
+# secret env set
 cat .env | tr '\n' ' ' | xargs flyctl secrets set
 
 ```
 
-fly.io env, see
+#### migration
 
-- https://community.fly.io/t/read-secrets-from-env-file/1040
-- https://fly.io/docs/reference/runtime-environment/
+```
+# create migration
+alembic revision --autogenerate -m 'hoge'
+
+# migrate
+alembic upgrade head # set to fly.toml [release] when deploy.
+
+# other
+alembic downgrade -1
+alembic history
+alembic heads
+
+```

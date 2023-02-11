@@ -6,7 +6,7 @@ import firebase_admin
 from firebase_admin import credentials
 
 from routers import posts, users
-from db.database import create_db_and_tables
+
 from core.settings import Settings
 from firebase_cred import cred
 # app
@@ -31,11 +31,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
 
 
 @app.exception_handler(500)
