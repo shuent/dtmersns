@@ -1,8 +1,8 @@
 # DTMer SNS monorepo
 
-- Backend: FastAPI, Python on GAE
+- Backend: FastAPI, Python on fly.io
 - Frontend: Next.js on Firebase Hosting
-- Infrastructure: Firebase Storage
+- other: Firebase Storage, Auth
 
 ## Links
 
@@ -63,4 +63,11 @@ alembic downgrade -1
 alembic history
 alembic heads
 
+```
+
+### all local emulator
+
+```
+FIREBASE_AUTH_EMULATOR_HOST="localhost:9099" uvicorn main:app --reload
+firebase emulators:start
 ```
