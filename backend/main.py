@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 import firebase_admin
 from firebase_admin import credentials
 
-from routers import posts, users
+from routers import posts, users, others
 
 from core.settings import Settings
 from firebase_cred import cred
@@ -40,6 +40,7 @@ async def internal_exception_handler(request: Request, exc: Exception):
 
 app.include_router(users.router)
 app.include_router(posts.router)
+app.include_router(others.router)
 
 
 @app.get('/')

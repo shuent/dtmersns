@@ -29,5 +29,5 @@ async def get_post(*, session: Session = Depends(get_session), post_id: str):
 
 @router.post('/')
 async def create_post(*, session: Session = Depends(get_session), post: PostCreate, user_uid=Depends(verify_user), ):
-
+    post.user_uid = user_uid
     return PostRepository.create(session, post)
