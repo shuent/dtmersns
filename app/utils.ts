@@ -67,5 +67,11 @@ export function useUser(): User {
 }
 
 export function validateEmail(email: unknown): email is string {
-  return typeof email === "string" && email.length > 3 && email.includes("@");
+  return (
+    typeof email === "string" &&
+    email.length > 5 &&
+    new RegExp(
+      /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/
+    ).test(email)
+  );
 }

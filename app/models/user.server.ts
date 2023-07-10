@@ -1,4 +1,4 @@
-import type { Password, User } from "@prisma/client";
+import type { Password, Profile, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 import { prisma } from "~/db.server";
@@ -6,11 +6,23 @@ import { prisma } from "~/db.server";
 export type { User } from "@prisma/client";
 
 export async function getUserById(id: User["id"]) {
-  return prisma.user.findUnique({ where: { id } });
+  return prisma.user.findUnique({
+    include: { profile: true },
+    where: { id },
+  });
 }
 
 export async function getUserByEmail(email: User["email"]) {
-  return prisma.user.findUnique({ where: { email } });
+  return prisma.user.findUnique({
+    include: { profile: true },
+    where: { email },
+  });
+}
+export async function getUserByNickname(nickname: User["nickname"]) {
+  return prisma.user.findUnique({
+    include: { profile: true },
+    where: { nickname },
+  });
 }
 
 export async function createUser(email: User["email"], password: string) {
@@ -24,7 +36,38 @@ export async function createUser(email: User["email"], password: string) {
           hash: hashedPassword,
         },
       },
+      profile: {
+        create: {
+          bio: "hello",
+        },
+      },
     },
+  });
+}
+
+export async function updateUser({
+  userId,
+  nickname,
+}: {
+  userId: User["id"];
+  nickname: User["nickname"];
+}) {
+  return prisma.user.update({
+    where: { id: userId },
+    data: { nickname },
+  });
+}
+
+export async function updateProfile({
+  userId,
+  profileData,
+}: {
+  userId: User["id"];
+  profileData: Partial<Profile>;
+}) {
+  return prisma.profile.update({
+    where: { userId },
+    data: profileData,
   });
 }
 
