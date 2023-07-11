@@ -20,7 +20,7 @@ model User {
   profile  Profile?
   posts    Post[]
   password Password?
-  Comment  Comment[]
+  comments  Comment[]
 }
 
 model Profile {

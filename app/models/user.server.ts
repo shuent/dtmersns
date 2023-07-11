@@ -25,6 +25,28 @@ export async function getUserByNickname(nickname: User["nickname"]) {
   });
 }
 
+export async function fetchUserData(userId: string) {
+  try {
+    const userData = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        profile: true,
+        posts: true,
+        comments: {
+          include: {
+            post: true,
+          },
+        },
+      },
+    });
+
+    return userData;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return null;
+  }
+}
+
 export async function createUser(email: User["email"], password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
